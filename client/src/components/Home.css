@@ -1,0 +1,17 @@
+
+.container{
+  
+    display: flex;
+    align-items: center;
+}
+
+.container-fluid{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.bg-image{
+    background-size: cover;
+    background-position: center center;
+}
