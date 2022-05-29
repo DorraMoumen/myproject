@@ -4,10 +4,10 @@ import {d17} from "../assets/d17.png" ;
 const Paiement = () => {
   return (
     <div>
-    <img src={d17}/>
-    <h2> Scanner QR pour payer : </h2>
+    <h1> La nouvelle solution de paiement : </h1><img src={d17}/>
+   
     <img src={codeqr}/>
-
+    <h2> Scanner QR pour payer : </h2>
 
     </div>
   )
