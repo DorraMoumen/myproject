@@ -10,12 +10,15 @@ import { data } from 'jquery';
 import f from '../assets/f.png';
 import h from '../assets/h.png';
 import CardItem from './CardItem';
-
+import Header from './Header1';
+import {useHistory} from "react-router-dom";
+import Navbarprofile from './Navbarprofile';
 const Upload = (props) => {
   let imageURL ="";
-  
+  const history = useHistory();
   const email=props.location.state.email
   console.log(email);
+  const [first, setfirst] = useState({})
   const [arr, setArr] = useState([]); // state for storing actual image
     const [file, setFile] = useState(null); // state for storing actual image
   const [previewSrc, setPreviewSrc] = useState(''); // state for storing previewImage
@@ -51,18 +54,7 @@ const [data,setData]=useState({})
 
 //   , [])
 //   console.log(files);
-const handleUser = async() => { 
 
-  try {
-  
-     await axios.post(`http://localhost:5000/api/addelt/${data._id}`,{titre:state.titre})
-    
-  }
-  
-  catch (error) {
-    console.error(error);
-  }
-  }
 
 useEffect(async() => {
 
@@ -111,6 +103,19 @@ console.log('id',data._id);
       dropRef.current.style.border = '2px dashed #e9ebeb';
     }
   };
+  const handleUser = async() => { 
+
+    try {
+    
+       await axios.post(`http://localhost:5000/api/addelt/${data._id}`,{titre:state.titre})
+      
+    }
+    
+    catch (error) {
+      console.error(error);
+    }
+    }
+
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -134,7 +139,8 @@ console.log('id',data._id);
             }
           });
           await handleUser()
-          // props.history.push('/list');
+          await alert('votre fichier est ajouté et en attante de validation')
+          await window.location.reload()
         } else {
           setErrorMsg('Please select a file to add.');
         }
@@ -145,38 +151,102 @@ console.log('id',data._id);
       error.response && setErrorMsg(error.response.data);
     }
   };
-  const deleteFunc= (id) => {
-    console.log(id);
-        axios.delete(`http://localhost:5000/${id}`)
-       }
+
+  const getFile=async(el) => { 
+  try {
+    const rsl=await axios.get("http://localhost:5000/getFile",{params:{titre:el}});
+    console.log(rsl);
+    await setfirst(rsl.data);
+    await history.push({
+      pathname:'/carditem',
+      search:'?query=first',
+      state:{first:rsl.data,el:data._id}
+    
+    })
+  } catch (error) {
+    console.error(error);
+  }
+ }
+  
+  console.log('first',first);
+
 
 console.log('arr',arr);
   return (
     <React.Fragment>
-    <div id="all" >
-    <Container id="main-container" className="d-grid h-100 ">
-    <div>
-    
-    <p>{data.genre=='f' ?  <img src={f} style={{width:'40px' ,margin:'20px'}}/> : <img src={h} style={{width:'150px' ,margin:'30px'}}/>}</p>
- <h1>nom:{data.nom}</h1>
- <h1>prenom:{data.prenom}</h1>
- <h1>email:{data.email}</h1>
- <Button><Modif  id={data._id} nom={data.nom} prenom={data.prenom}/></Button>
+    <Navbarprofile email={email} style={{ backgroundColor:"rgb(115, 210, 222)"}}/>
+    <div className="taa-profile d-flex  align-items-center">
+  
+         <div className="rounded p-4 p-sm-3">
+         <form  id="profile" >
+         <table class="table">
+         <thead>
+           <tr>
+             <th scope="col">
+             <p className=" mb-3 fs-3 fw-normal">{data.genre=='f' ?  <img src={f} style={{width:'40px' ,margin:'20px'}}/> : <img src={h} style={{width:'150px' ,margin:'30px'}}/>}</p>
+             </th>
+             </tr>
+             <tr>
+             <th scope='col'>
+                <h3 className="position-relative"> Vos données</h3>
+              </th>
+              </tr><tr>
+              <th scope="col">
+             <p className="mb-3"><em>Nom:{data.nom}</em></p>
+             </th> 
+             </tr>
+             <tr>  
+             <th scope="col">    
+             <p className="mb-3"><em>Prenom:{data.prenom}</em></p>
+             </th> 
+             </tr>
+             <tr>   
+             <th scope="col">   
+             <p className="mb-3"><em>Email:{data.email}</em></p>
+             
+             </th>
+             </tr>
+             <tr>
+             <th>
+             
+             <div className="vr" />        
+ <Button type="button" className="btn btn-primary btn-sm"><Modif  id={data._id} nom={data.nom} prenom={data.prenom}/></Button>
+          
+             </th>
+             </tr>
+             </thead>
+             </table>     
+          </form>
+         </div>   
+<div className='col'> | </div>
+ <div className='row'>
+ <table class="table table-striped">
+ <thead>
+   <tr>
+     <th scope="col">
+ <h3 style={{color:"white"}}> Mes éléments : </h3>
+     </th>
+     </tr>
+     <tr>
+     <th scope='col'>
  {arr.map((elt,key)=>
      <div key={key}>
+     <button type="button" className="secondary" onClick={()=>getFile(elt)}> Titre du rapport :{elt}</button>
     
-<ul>
-<li>{elt} </li> <button onClick={deleteFunc(elt._id)}>delete</button>
-</ul>
-   
-    </div>)}
-  
+     </div>
+     
+    
+    )}
+    </th>
+    </tr></thead></table>
     </div>
-      <Form className="search-form" onSubmit={handleOnSubmit}>
+    <div className='col'>  |  </div>
+  
+      <Form className="rounded p-4 p-sm-3" onSubmit={handleOnSubmit}>
         {errorMsg && <p className="errorMsg">{errorMsg}</p>}
         <Row>
         <Col>
-          <Form.Group controlId="titre">
+          <Form.Group className="mb-3" controlId="titre">
             <Form.Control
               type="text"
               name="titre"
@@ -189,7 +259,7 @@ console.log('arr',arr);
       </Row>
         <Row>
           <Col>
-            <Form.Group controlId="universite">
+            <Form.Group className="mb-3" controlId="universite">
               <Form.Control
                 type="text"
                 name="universite"
@@ -214,7 +284,7 @@ console.log('arr',arr);
         </Row>
         <Row>
           <Col>
-            <Form.Group controlId="description">
+            <Form.Group controlId="description" className="mb-3">
               <Form.Control
                 type="text"
                 name="description"
@@ -260,18 +330,18 @@ console.log('arr',arr);
           )}
         </div>
         
-        <Button variant="primary" type="submit" >
-          Envoyer
+        <Button variant="primary" type="submit" className='btn btn-success'>
+          Envoyer une demande 
         </Button>
         
       </Form>
-     </Container>
-     </div>
+    </div>
+     
     </React.Fragment>
   )
 }
 
-export default Upload
+export default Upload ; 
 
 
 

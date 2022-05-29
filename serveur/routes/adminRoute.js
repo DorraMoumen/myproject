@@ -16,21 +16,22 @@ router.post('/user/register',register,async(req,res)=>{
    }
    if (email==="dmoumen011@gmail.com"){
     const hashedPassword= await bcrypt.hash( motdepasse,10)
-    await users.create({nom,prenom,email,motdepasse:hashedPassword,genre,isAdmin:true},(err)=>{
+    return users.create({nom,prenom,email,motdepasse:hashedPassword,genre,isAdmin:true},(err)=>{
      return (err?(res.status(501).json({msg:'failed to add user'}))
      :
      (res.status(200).json({msg:'admin added to database'})))
  
  })
    }
-       /************ CRYPTAGE DU MOT DE PASSE ***********/
-   const hashedPassword= await bcrypt.hash( motdepasse,10)
-   await users.create({nom,prenom,email,motdepasse:hashedPassword,genre},(err)=>{
-    return (err?(res.status(501).json({msg:'failed to add user'}))
-    :
-    (res.status(200).json({msg:'user added to database'})))
-
-})
+   else {
+    const hashedPassword= await bcrypt.hash( motdepasse,10)
+    return users.create({nom,prenom,email,motdepasse:hashedPassword,genre},(err)=>{
+     return (err?(res.status(501).json({msg:'failed to add user'}))
+     :
+     (res.status(200).json({msg:'admin added to database'})))
+ 
+ })
+   }
 
 })
 
@@ -49,8 +50,8 @@ if (!searchUser){
  else{
 var token = jwt.sign({email},process.env.tokenkey)
  //res.send(token)
- return(res.json({msg:'login succeeded !', token:token, userId:searchUser._id, isAdmin:searchUser.isAdmin}))
- 
+ return(res.json({msg:'login succeeded !', token:token, userId:searchUser._id  , isAdmin:searchUser.isAdmin }))
+
 }})
 
 /************************************ AUTHENTIFICATION*******************************************/
@@ -95,6 +96,25 @@ router.post('/addelt/:id',async(req,res)=>{
        console.log(error); 
     }
 })
+router.put('/updateelt/:id',(req,res)=>{
+    const {oldName,newName}=req.body
+users.updateOne({_id:req.params.id,mesElements:oldName},
+    { $set: { "mesElements.$" : newName } },(err)=>{err?res.send(err):res.send("update succeeded")})
+})
+/*******************************************Delete ********************************** */
+router.delete('/deleteelt/:id',(req,res)=>{
+    const {titre}=req.query
+users.updateOne({_id:req.params.id},
+    { $pull: { "mesElements" : titre } },(err)=>{err?res.send(err):res.send("delete succeeded")})
+})
+/* TemplateDoc.findOneAndUpdate(
+    { userId: _id },
+    { $pull: { templates: { _id: templateid } } },
+    { new: true }
+  )
+    .then(templates => console.log(templates))
+    .catch(err => console.log(err));*/
+
 
 /************************************ GET ALL USERS ************************************************/
 

@@ -46,7 +46,7 @@ const Modif = (props) => {
 
     </Modal.Body>
     <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
+      <Button variant="secondary" className='btn btn-danger' onClick={handleClose}>
         Fermer
       </Button>
       <Button variant="primary" onClick={handleChange}>

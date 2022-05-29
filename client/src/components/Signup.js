@@ -23,48 +23,42 @@ const  SignUp =() =>{
       }
         return (
             <div id="all">
-            <Container  id="main-container" className="d-grid h-100 ">
-            <form  id="forms" className="text-center w-100">
+            
+            <div className="color-overlay d-flex justify-content-center align-items-center">
+            <Form   className="rounded p-4 p-sm-3">
                 <h3 style={{color: "Black"}} className=" mb-3 fs-3 fw-normal" id="label">S'inscrire</h3>
                 
                
-                <Row>
-                <Col>
+               
                 <Form.Group className="mb-3" >
                 <Form.Label>Nom:</Form.Label>
                 <Form.Control type="text" size="lg"  placeholder="votre Nom" className="position-relative" onChange={(e)=>{setNom(e.target.value)}}/>
               </Form.Group>
               
-              </Col>
-              <Col>
+             
                
               <Form.Group className="mb-3" >
               <Form.Label>Prénom:</Form.Label>
               <Form.Control type="text" size="lg" placeholder="votre Prénom" className="position-relative" onChange={(e)=>{setPrenom(e.target.value)}} />
             </Form.Group>
             
-             </Col>
-             </Row>
-            <Row>
-            <Col >
+           
+            
             
                 <Form.Group className="mb-3" controlId="sign-up-email-adress">
                   <Form.Label>Email:</Form.Label>
                   <Form.Control type="email"  size="lg" placeholder="Entrer votre email"  className="position-relative" onChange={(e)=>{setEmail(e.target.value)}}/>
                 </Form.Group>
             
-              </Col>
-              </Row>
-              <Row>
-              <Col>
+             
+             
           
                 <Form.Group className="mb-3" controlId="sign-up-email-password">
                   <Form.Label>Mot de passe </Form.Label>
                   <Form.Control type="password" size="lg" placeholder=" Votre Mot De Passe doit contenir au moins 8 caractères "  className="position-relative"  onChange={(e)=>{setMotdepasse(e.target.value)}}/>
                 </Form.Group>
               
-               </Col>
-               </Row>
+               
                <Row>
                <Col>
                 <Form.Label>Genre </Form.Label>
@@ -96,8 +90,8 @@ const  SignUp =() =>{
               </div>
               <Link to='/'> <a href=""> Vous avez déjà un compte ! </a></Link>
               <p className="mt-5 text-muted">&copy; 2021-2022</p>
-            </form>
-            </Container>
+            </Form>
+            </div>
 </div>
         )};
 

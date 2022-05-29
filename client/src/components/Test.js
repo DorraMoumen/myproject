@@ -45,9 +45,9 @@ const test = () => {
                          <div className="form-group">
                                <Form.Group className="mb-3" controlId="Specialite ">
                                   <Form.Label>votre spécialité :</Form.Label>
-                                  <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Informatique ' onChange={(e)=>{setSpecialite("info")}} />
-                                  <MDBCheckbox name='flexCheck' value='' id='flexCheckChecked' label='Gestion' onChange={(e)=>{setSpecialite("ges")}} />
-                                  <MDBCheckbox name='flexCheck' value='' id='flexCheckChecked' label='Economie' onChange={(e)=>{setSpecialite("eco")}} />
+                                  <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Informatique ' onChange={(e)=>{setSpecialite("informatique")}} />
+                                  <MDBCheckbox name='flexCheck' value='' id='flexCheckChecked' label='Gestion' onChange={(e)=>{setSpecialite("gestion")}} />
+                                  <MDBCheckbox name='flexCheck' value='' id='flexCheckChecked' label='Economie' onChange={(e)=>{setSpecialite("economie")}} />
                                </Form.Group>
                          </div>
                          </Col>

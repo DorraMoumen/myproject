@@ -39,22 +39,26 @@ import FilesList from './components/FilesList';
 import List from './components/List';
 import Signup from './components/Signup';
 //import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import CardItem from './components/CardItem';
+import Newlogin from './components/Newlogin';
+import Paiement from './components/Paiement';
 function App() {
 
   
   return (
     
     <div className="App">
-    
+
     <Switch>
-    <Route exact path='/' component={Login}></Route>
+    <Route exact path='/' component={Newlogin}></Route>
     <Route path='/upload' component={Upload}></Route>
     <Route path='/sinscrire' component={SignUp}></Route>
     <Route exact path='/List' component={List}></Route>
     <Route path='/profileAdmin' component={FileList}></Route>
     <Route path='/Signup' component={Signup}></Route>
     <Route path='/Acceuil' component={Accueil}></Route>
+    <Route path='/carditem' component={CardItem}></Route>
+
     </Switch>  
     
     

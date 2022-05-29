@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from 'react'
 import Accueil from './Accueil'
 import axios from 'axios'
 import Header from './Header1'
+import Navbarprofile from './Navbarprofile'
 const List = (props) => {
 const [isAuth,setIsAuth] = useState(false)
 const [data,setData] = useState({})
@@ -33,22 +34,24 @@ console.log(email);
         setInputSpec(spec);
     }
   return (
-    <div>
-    <Header email={email} />
+    <div style={{ backgroundColor: "rgb(115, 210, 222)"}}>
+    <Navbarprofile email={email} />
     {isAuth?
-      <div>
-   
-      <h1>Search</h1>
-      <div>
-      <textarea aria-label='Search' onChange={inputHandler}></textarea>
-      </div>
-      <h1>Specialité</h1>
-      <div>
-      <textarea aria-label='Search' onChange={inputHandler2}></textarea>
+     
+      <div className="row align-items-center justify-content-center">
+       
+      <p> Mots clés</p>
       
-      </div>
-      <div><Accueil input1={inputText} input2={inputspec}/></div>
-      </div>
+      <textarea aria-label='Search' className=" mb-3 fs-3 fw-normal" size="sm" onChange={inputHandler}></textarea>
+      
+      <p> Spécialité </p>
+      
+      <textarea aria-label='Search' className=" mb-3 fs-3 fw-normal" size="sm" onChange={inputHandler2}></textarea>
+      
+      
+      <Accueil input1={inputText} input2={inputspec}/>
+     </div>
+      
     :
   <div><h1>hello</h1></div>}
     </div>

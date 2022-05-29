@@ -30,11 +30,12 @@ const Navbarprofile = (props) => {
     <Navbar.Brand href="">Solvy </Navbar.Brand>
     <Nav className="me-auto">
       <Nav.Link href=""><Link to='/List'> Accueil </Link></Nav.Link>
-   
+      <Nav.Link href=""><Link to={{ pathname:'/upload', state:{email:props.email}}} >Profile</Link></Nav.Link>
       <Nav.Link href=""><MenuItem  onClick={sedeconnecter}><Link to="/" >Déconnecter</Link></MenuItem></Nav.Link>
     </Nav>
     </Container>
   </Navbar>
+  <div className='row'>  -   </div>
     </div>
   )
 }

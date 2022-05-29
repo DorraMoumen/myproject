@@ -98,12 +98,6 @@ Router.delete('/:id',(req,res)=>{
 
 })
 
-Router.delete('/delete',(req,res)=>{
-  const {titre}=req.body
-  File.findOneAndDelete({titre:titre},err=>
-    err?res.send('delete file failed'):res.send('deletion succeeded'))
-
-})
 /*************************************************UPDATE TITLE AND DESCRIPTION **************************/
 
 Router.put('/update/:id',(req,res)=>{
@@ -129,8 +123,8 @@ Router.get('/download/:id', async (req, res) => {
 /*****************************Get file by title ***********************************************/
 Router.get('/getFile', async (req, res) => {
   try {
-  
-    const files = await File.find(req.body).exec()
+    const {titre}=req.query
+    const files = await File.findOne({titre}).exec()
     
     return(res.json(files));
   } catch (error) {

@@ -6,6 +6,10 @@ import { Card } from 'react-bootstrap';
 import { ListGroup , ListGroupItem } from 'react-bootstrap';
 import axios from 'axios';
 import PrincipalHeader from './PrincipalHeader';
+import Footer2 from './Footer2';
+import Footer1 from './Footer1';
+
+
 
   const Accueil = (props) => {
     const [files, setFiles] = useState([])
@@ -43,15 +47,23 @@ import PrincipalHeader from './PrincipalHeader';
        
     })
     
+    const [state, setState] = useState({count:0})
+
+     
+  
+    const handleClick = () => {
+      // Use updater function when new state is derived from old
+      setState(prev => ({ count: prev.count + 1 }));
+    };
 
 
     
     return (
-      <div style={{ width:"200%" , height:"50%"}}>
+      <div style={{ width:"200%" , height:"50%" ,  backgroundColor: "rgb(115, 210, 222)"}} className="row align-items-center justify-content-center">
       {filteredData.map((elt,key)=><div key={key}>
-      
+      <div className='col'>
       <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+  
   <Card.Body>
   <ListGroup >
      <ListGroupItem>
@@ -72,25 +84,21 @@ import PrincipalHeader from './PrincipalHeader';
      <Card.Link href="#">Voir plus</Card.Link>
      </Button>
      </ListGroupItem>
+  
     <ListGroupItem>
-    <Button variant="dark">
-    <Card.Link href="#">Ajouter Favoris </Card.Link>
-    </Button>
-    </ListGroupItem>
-    <ListGroupItem>
-    <Button variant="dark">
-    <Card.Link href="#">Ajouter Paniers</Card.Link>
+    <Button variant="dark" onClick={handleClick} > <div className="counter">{state.count}</div>
+ Ajouter panier
     </Button>
     </ListGroupItem>
  
   </ListGroup>
   </Card.Body>
 </Card>
-      
+     </div> 
       
       
       </div>)}
-
+<Footer1/>
       </div>
     )
   }

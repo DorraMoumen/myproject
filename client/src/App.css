@@ -1,5 +1,51 @@
 .App {
     font-family: sans-serif;
-    text-align: center;
+    
   }
+  .masthead{
+    min-height:100vh;
+    position: relative;
+  }
+  .color-overlay {
+    position:absolute ;
+    background-color: rgba(0,0,0,0.2);
+    background-image:url("./assets/background1.jpg");
+    max-width : 100%;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    mix-blend-mode: normal;
+  }
+  form {
+    
+    background-color: white;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+  }
+  .form{
+    background-image:url("./assets/library.png");
+  }
+  form #profile{
+    background-color: rgb(127, 161, 247);
+  }
+
+  .taa-profile{
+    position:absolute ;
+    background-color: rgb(115, 210, 222);
   
+    max-width : 100%;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    mix-blend-mode: normal; 
+   
+  }
+  .taa-accueil{
+    position:absolute ;
+    background-color: rgb(115, 210, 222);
+    background-image:url("./assets/bgpp.jpg");
+    display:inline;
+    justify-content:center;
+ 
+    
+    
+  }

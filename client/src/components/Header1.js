@@ -64,8 +64,7 @@ const Header = (props) => {
                
               </MenuItem>
               <MenuItem icon={<CgProfile/>}><Link to={{ pathname:'/upload', state:{email:props.email}}} >Profile</Link></MenuItem>
-              <MenuItem icon={<FaRegHeart />}>Favoris</MenuItem>
-              <MenuItem icon={<ImList2/>}>mes éléments</MenuItem>
+              
              
             </Menu>
           </SidebarContent>

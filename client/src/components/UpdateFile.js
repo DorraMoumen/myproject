@@ -1,19 +1,26 @@
-
 import React,{useState} from 'react'
 import { Form,Modal,Button } from 'react-bootstrap';
 import axios from 'axios'
+import {useHistory} from "react-router-dom";
 const UpdateFile = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [id, setID] = useState(props.el);
   const [titre, setTitre] = useState(props.titre);
   const [universite, setUniversite] = useState(props.universite);
   const [specialite, setSpecialite] = useState(props.specialite);
   const [description, setDescription] = useState(props.description);
-  
+  const oldName=props.titre
+  const history = useHistory();
+  const updateArr=()=>{
+    axios.put(`http://localhost:5000/api/updateelt/${id}`,{oldName:oldName,newName:titre})
+    history.goBack()
+  }
   const handleChange = async() => {
    await axios.put(`http://localhost:5000/update/${props.id}`,{titre:titre,universite:universite, specialite:specialite ,description:description})
-   await  window.location.reload()
+   await updateArr()
+
   }
   return (
     <div>

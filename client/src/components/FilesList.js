@@ -3,6 +3,7 @@ import download from 'downloadjs';
 import axios from 'axios';
 import Update from './Update';
 import Header from './Header1';
+import PrincipalHeader from './PrincipalHeader';
 
 const FilesList = () => {
   const [filesList, setFilesList] = useState([]);
@@ -24,7 +25,8 @@ const FilesList = () => {
 
   const deleteFunc= (id) => {
     axios.delete(`http://localhost:5000/${id}`)
-    getFilesList()
+ getFilesList()
+    
    }
 /*******************************VALIDER**************************************** */
 
@@ -54,7 +56,7 @@ const FilesList = () => {
 
   return (
     <div className="files-container">
-    <Header/>
+    <PrincipalHeader/>
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
       <table  className="table">
         <thead className="table-dark">
@@ -77,7 +79,7 @@ const FilesList = () => {
                   <td className="file-universite">{universite}</td>
                   <td className="file-specialite">{specialite}</td>
                   <td className="file-description">{description}</td>
-                  <td className="file-approved">{approved}</td>
+              
                   <td>
                     <button type="button" class="btn btn-success" onClick={() =>
                         downloadFile(_id, file_path, file_mimetype)}
